@@ -1,57 +1,46 @@
--- AstroCore provides a central place to modify mappings, vim options, autocommands, and more!
--- Configuration documentation can be found with `:h astrocore`
--- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
---       as this provides autocomplete and documentation while editing
-
+-- ~/.config/nvim/lua/plugins/astrocore.lua
 ---@type LazySpec
 return {
   "AstroNvim/astrocore",
   ---@type AstroCoreOpts
   opts = {
-    -- Configure core features of AstroNvim
+    -- 1. FEATURES
     features = {
-      large_buf = { size = 1024 * 256, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
-      autopairs = true, -- enable autopairs at start
-      cmp = true, -- enable completion at start
-      diagnostics_mode = 3, -- diagnostic mode on start (0 = off, 1 = no signs/virtual text, 2 = no virtual text, 3 = on)
-      highlighturl = true, -- highlight URLs at start
-      notifications = true, -- enable notifications at start
+      large_buf = { size = 1024 * 256, lines = 10000 },
+      autopairs = true,
+      cmp = true,
+      diagnostics_mode = 3,
+      highlighturl = true,
+      notifications = true,
     },
-    -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
+    -- 2. DIAGNOSTICS
     diagnostics = {
       virtual_text = true,
       underline = true,
     },
-    -- vim options can be configured here
+    -- 3. OPTIONS
     options = {
-      opt = { -- vim.opt.<key>
-        relativenumber = true, -- sets vim.opt.relativenumber
-        number = true, -- sets vim.opt.number
-        spell = false, -- sets vim.opt.spell
-        signcolumn = "yes", -- sets vim.opt.signcolumn to yes
-        wrap = false, -- sets vim.opt.wrap
+      opt = {
+        relativenumber = true,
+        number = true,
+        spell = false,
+        signcolumn = "yes",
+        wrap = false,
       },
-      g = { -- vim.g.<key>
-        -- configure global vim variables (vim.g)
-        -- NOTE: `mapleader` and `maplocalleader` must be set in the AstroNvim opts or before `lazy.setup`
-        -- This can be found in the `lua/lazy_setup.lua` file
+      g = {
+        -- Disable Copilot by default
+        copilot_enabled = false,
       },
     },
-    -- Mappings can be configured through AstroCore as well.
-    -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
+    -- 4. KEYMAPS
     mappings = {
-      -- first key is the mode
+      -- MODO NORMAL
       n = {
-        -- second key is the lefthand side of the map
-
-        -- navigate buffer tabs
+        -- Navegación de buffers (Tus mapeos actuales)
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
-
         ["<Leader>C"] = { "<cmd>bdelete<CR>", desc = "Close Buffer" },
-        -- Opcional: elimina el mapeo original si ya existe
-        ["<Leader>c"] = false,
-        -- mappings seen under group name "Buffer"
+        ["<Leader>c"] = false, -- Disable original
         ["<Leader>bd"] = {
           function()
             require("astroui.status.heirline").buffer_picker(
@@ -61,12 +50,58 @@ return {
           desc = "Close buffer from tabline",
         },
 
-        -- tables with just a `desc` key will be registered with which-key if it's installed
-        -- this is useful for naming menus
-        -- ["<Leader>b"] = { desc = "Buffers" },
+        -- ==========================================
+        -- NUEVO: CREATE FILE IN CURRENT DIRECTORY (<Leader>cf)
+        -- ==========================================
+        ["<Leader>cf"] = {
+          function()
+            -- Obtener ruta del buffer actual
+            local current_dir = vim.fn.expand "%:p:h" .. "/"
 
-        -- setting a mapping to false will disable it
-        -- ["<C-S>"] = false,
+            vim.ui.input({
+              prompt = "Create file in: ",
+              default = current_dir,
+              completion = "file",
+            }, function(input)
+              if not input or input == "" then return end
+
+              -- Crear carpetas automáticamente si no existen
+              local dir = vim.fn.fnamemodify(input, ":h")
+              if vim.fn.isdirectory(dir) == 0 then vim.fn.mkdir(dir, "p") end
+
+              vim.cmd("edit " .. input)
+              vim.cmd "write"
+              print("Archivo creado: " .. input)
+            end)
+          end,
+          desc = "Create file in current directory",
+        },
+
+        -- ==========================================
+        -- DELETE WITHPUT COPY (Black hole register)
+        -- ==========================================
+        ["d"] = { '"_d', desc = "Delete (no yank)" },
+        ["c"] = { '"_c', desc = "Change (no yank)" },
+        ["x"] = { '"_x', desc = "Delete char (no yank)" },
+        ["D"] = { '"_D', desc = "Delete line (no yank)" },
+        ["C"] = { '"_C', desc = "Change line (no yank)" },
+      },
+
+      -- MODO VISUAL
+      v = {
+        ["d"] = { '"_d', desc = "Delete (no yank)" },
+        ["c"] = { '"_c', desc = "Change (no yank)" },
+        ["x"] = { '"_x', desc = "Delete char (no yank)" },
+      },
+    },
+    -- 5. AUTOCOMMANDS (FOR JQ)
+    autocmds = {
+      json_formatting = {
+        {
+          event = "FileType",
+          pattern = { "json", "httpResult" },
+          callback = function() vim.bo.formatprg = "jq" end,
+        },
       },
     },
   },

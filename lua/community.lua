@@ -17,7 +17,10 @@ return {
 
   { import = "astrocommunity.diagnostics.trouble-nvim" },
   { import = "astrocommunity.scrolling.mini-animate" },
-  -- { import = "astrocommunity.completion.supermaven-nvim" },
+  { import = "astrocommunity.completion.supermaven-nvim" },
+  { import = "astrocommunity.completion.avante-nvim" },
+  { import = "astrocommunity.completion.copilot-lua" },
+
   { import = "astrocommunity.motion.nvim-surround" },
 
   { import = "astrocommunity.media.image-nvim" },
