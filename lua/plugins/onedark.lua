@@ -5,7 +5,7 @@ return {
     require("onedark").setup {
       -- Main options --
       style = "dark", -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
-      transparent = true, -- 🔥 Show/hide background - TRANSPARENCIA TOTAL ACTIVADA
+      transparent = true, -- 🔥 Show/hide background - FULL TRANSPARENCY ENABLED
       term_colors = true, -- Change terminal color as per the selected theme style
       ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
       cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
@@ -27,7 +27,7 @@ return {
 
       -- Lualine options --
       lualine = {
-        transparent = true, -- 🔥 lualine center bar transparency - TRANSPARENCIA TOTAL ACTIVADA
+        transparent = true, -- 🔥 lualine center bar transparency - FULL TRANSPARENCY ENABLED
       },
 
       -- Custom Highlights --
@@ -41,7 +41,7 @@ return {
         background = true, -- use background color for virtual text
       },
     }
-    -- Load the colorscheme
-    vim.cmd.colorscheme "onedark"
+    -- We don't apply the colorscheme here: astroui decides the active theme by
+    -- reading the persisted choice (lua/user/theme.lua), so <Leader>ft wins on restart.
   end,
 }

@@ -22,11 +22,11 @@ return {
       highlight = { enable = true, timeout = 750 },
       ui = { winbar = true, keybinds = { prev = "H", next = "L" } },
 
-      -- 👇 AQUÍ ACTIVAS EL FORMATEO AUTOMÁTICO
+      -- 👇 ENABLE AUTOMATIC FORMATTING HERE
       response = {
         hooks = {
           decode_url = true,
-          format = true, -- usa `gq` para formatear el body
+          format = true, -- uses `gq` to format the body
         },
       },
     }

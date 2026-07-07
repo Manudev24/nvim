@@ -1,19 +1,19 @@
 return {
   "stevearc/dressing.nvim",
-  lazy = false, -- Cargarlo de inmediato para que intercepte el UI
+  lazy = false, -- Load immediately so it intercepts the UI
   opts = {
     input = {
-      -- Esto fuerza a que el cuadro sea relativo a todo el editor
+      -- This forces the box to be relative to the whole editor
       relative = "editor",
-      -- Posicionamiento
-      anchor = "NW", -- Punto de anclaje (North-West)
-      prefer_width = 60, -- Ancho preferido del cuadro
+      -- Positioning
+      anchor = "NW", -- Anchor point (North-West)
+      prefer_width = 60, -- Preferred box width
       max_width = { 140, 0.9 },
       min_width = { 20, 0.2 },
 
-      -- Estética de la ventana
+      -- Window aesthetics
       win_options = {
-        winblend = 0, -- Transparencia (0 es sólido)
+        winblend = 0, -- Transparency (0 is solid)
         winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
       },
     },

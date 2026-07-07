@@ -21,16 +21,31 @@ return {
     opts = function(_, opts)
       -- customize the dashboard header
       opts.section.header.val = {
-        "░█████████  ░██████░██    ░██ ░██████████ ░██         ░████████   ░█████████  ░██████████ ░██       ░██ ",
-        "░██     ░██   ░██   ░██  ░██  ░██         ░██         ░██    ░██  ░██     ░██ ░██         ░██       ░██ ",
-        "░██     ░██   ░██    ░██░██   ░██         ░██         ░██    ░██  ░██     ░██ ░██         ░██  ░██  ░██ ",
-        "░█████████    ░██     ░███    ░█████████  ░██         ░████████   ░█████████  ░█████████  ░██ ░████ ░██ ",
-        "░██           ░██    ░██░██   ░██         ░██         ░██     ░██ ░██   ░██   ░██         ░██░██ ░██░██ ",
-        "░██           ░██   ░██  ░██  ░██         ░██         ░██     ░██ ░██    ░██  ░██         ░████   ░████ ",
-        "░██         ░██████░██    ░██ ░██████████ ░██████████ ░█████████  ░██     ░██ ░██████████ ░███     ░███ ",
-        "                                                                                                        ",
-        "                                                                                                        ",
-        "                                                                                                        ",
+        "        @@@@@@@@@@@                                      ",
+        "        @@@@@@@@@@@                                      ",
+        "   @@@@@@@@@@@@@@@@@@@@@@@@@@@@                          ",
+        "   @@@@@@@@@@@@@@@@@@@@@@@@@@@@                          ",
+        "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    ",
+        "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    ",
+        "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                    ",
+        "   @@@@@@@@                                              ",
+        "   @@@@@@@@  +++++++++++++++++++++++++++++++++           ",
+        "   @@@@@@@@  +++++++++++++++++++++++++++++++++           ",
+        "   @@@@@@@@  +++++++++++++++++++   +++++++++++++++++     ",
+        "   @@@@@@@@  +++++++++++++++++++   +++++++++++++++++     ",
+        "             +++++++++++++++++++   +++++       +++++     ",
+        "      +++++  +++++++++++++++++++   +++++       +++++     ",
+        "      +++++  +++++++++++++++++++   +++++       +++++     ",
+        "      +++++        +++++++++++++   +++++       +++++     ",
+        "      +++++        +++++++++++++   +++++       +++++     ",
+        "      ++++++++++++++++++++++++++   +++++       +++++     ",
+        "      ++++++++++++++++++++++++++   +++++       +++++     ",
+        "      ++++++++++++++++++++++++++   +++++++++++++++++     ",
+        "      +++++  +++++++++++++++++++   +++++++++++++         ",
+        "      +++++  +++++++++++++++++++   +++++++++++++         ",
+        "      +++++                        +++++                 ",
+        "      ++++++++++++++++++++++++++++++++                   ",
+        "      ++++++++++++++++++++++++++++++++                   ",
       }
       opts.section.header.opts.hl = "Type"
       return opts
@@ -56,33 +71,33 @@ return {
       local notify = require "notify"
 
       notify.setup {
-        -- Timeout para las notificaciones (en ms)
-        timeout = 3000, -- 3 segundos
+        -- Timeout for notifications (in ms)
+        timeout = 3000, -- 3 seconds
 
-        -- Configuración para el color de fondo
+        -- Background color setting
         background_colour = "#000000",
 
-        -- Configuración adicional para evitar que se queden abiertas
-        stages = "fade_in_slide_out", -- Animación de entrada y salida
-        render = "default", -- Estilo de renderizado
+        -- Extra settings to keep notifications from staying open
+        stages = "fade_in_slide_out", -- Enter/exit animation
+        render = "default", -- Render style
 
-        -- Auto-cerrar notificaciones después del timeout
+        -- Auto-close notifications after the timeout
         on_open = function(win) vim.api.nvim_win_set_config(win, { zindex = 100 }) end,
 
-        -- Configuración para cerrar automáticamente
+        -- Settings to close automatically
         max_width = 50,
         max_height = 10,
         minimum_width = 50,
 
-        -- Configurar para que las notificaciones no se acumulen
+        -- Keep notifications from stacking up
         fps = 30,
-        level = 2, -- Solo mostrar mensajes de nivel INFO o superior
+        level = 2, -- Only show messages at INFO level or above
       }
 
-      -- Reemplazar vim.notify con nvim-notify
+      -- Replace vim.notify with nvim-notify
       vim.notify = notify
 
-      -- Mapeo de teclas para cerrar todas las notificaciones manualmente
+      -- Keymap to dismiss all notifications manually
       vim.keymap.set(
         "n",
         "<leader>nc",

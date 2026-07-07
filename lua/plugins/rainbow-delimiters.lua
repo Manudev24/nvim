@@ -6,34 +6,34 @@ return {
 
     vim.g.rainbow_delimiters = {
       strategy = {
-        [""] = rainbow_delimiters.strategy["global"], -- Estrategia global por defecto
-        vim = rainbow_delimiters.strategy["local"], -- Estrategia local para archivos vim
+        [""] = rainbow_delimiters.strategy["global"], -- Default global strategy
+        vim = rainbow_delimiters.strategy["local"], -- Local strategy for vim files
       },
       query = {
-        [""] = "rainbow-delimiters", -- Query por defecto
-        lua = "rainbow-blocks", -- Query específico para Lua
-        javascript = "rainbow-delimiters", -- Query para JavaScript
-        typescript = "rainbow-delimiters", -- Query para TypeScript
-        python = "rainbow-delimiters", -- Query para Python
-        dart = "rainbow-delimiters", -- Query para Dart/Flutter
+        [""] = "rainbow-delimiters", -- Default query
+        lua = "rainbow-blocks", -- Lua-specific query
+        javascript = "rainbow-delimiters", -- Query for JavaScript
+        typescript = "rainbow-delimiters", -- Query for TypeScript
+        python = "rainbow-delimiters", -- Query for Python
+        dart = "rainbow-delimiters", -- Query for Dart/Flutter
       },
       priority = {
-        [""] = 110, -- Prioridad por defecto
-        lua = 210, -- Prioridad alta para Lua
+        [""] = 110, -- Default priority
+        lua = 210, -- High priority for Lua
       },
       highlight = {
-        -- 🎨 Colores personalizados para cada nivel de anidación
-        "RainbowDelimiterRed", -- Nivel 1: Rojo
-        "RainbowDelimiterYellow", -- Nivel 2: Amarillo
-        "RainbowDelimiterBlue", -- Nivel 3: Azul
-        "RainbowDelimiterOrange", -- Nivel 4: Naranja
-        "RainbowDelimiterGreen", -- Nivel 5: Verde
-        "RainbowDelimiterViolet", -- Nivel 6: Violeta
-        "RainbowDelimiterCyan", -- Nivel 7: Cian
+        -- 🎨 Custom colors for each nesting level
+        "RainbowDelimiterRed", -- Level 1: Red
+        "RainbowDelimiterYellow", -- Level 2: Yellow
+        "RainbowDelimiterBlue", -- Level 3: Blue
+        "RainbowDelimiterOrange", -- Level 4: Orange
+        "RainbowDelimiterGreen", -- Level 5: Green
+        "RainbowDelimiterViolet", -- Level 6: Violet
+        "RainbowDelimiterCyan", -- Level 7: Cyan
       },
     }
 
-    -- 🎨 Configuración de colores más vibrantes para el tema OneDark
+    -- 🎨 More vibrant color setup for the OneDark theme
     vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { fg = "#E06C75", bold = true })
     vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", { fg = "#E5C07B", bold = true })
     vim.api.nvim_set_hl(0, "RainbowDelimiterBlue", { fg = "#61AFEF", bold = true })

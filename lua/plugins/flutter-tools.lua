@@ -5,8 +5,8 @@ return {
     lsp = {
       color = {
         enabled = true,
-        background = false, -- Cambia esto a true para probar
-        background_color = { r = 19, g = 17, b = 24 }, -- Pon el color de fondo de tu terminal (RGB)
+        background = false, -- Change this to true to try it out
+        background_color = { r = 19, g = 17, b = 24 }, -- Set your terminal's background color (RGB)
         foreground = false,
         virtual_text = true,
         virtual_text_str = "■",

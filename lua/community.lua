@@ -10,7 +10,6 @@ return {
   { import = "astrocommunity.pack.swift" },
   { import = "astrocommunity.pack.kotlin" },
   { import = "astrocommunity.pack.go" },
-  { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.pack.html-css" },
   { import = "astrocommunity.pack.cs" },
   { import = "astrocommunity.pack.typescript-all-in-one" },
@@ -18,8 +17,6 @@ return {
   { import = "astrocommunity.diagnostics.trouble-nvim" },
   { import = "astrocommunity.scrolling.mini-animate" },
   { import = "astrocommunity.completion.supermaven-nvim" },
-  { import = "astrocommunity.completion.avante-nvim" },
-  { import = "astrocommunity.completion.copilot-lua" },
 
   { import = "astrocommunity.motion.nvim-surround" },
 

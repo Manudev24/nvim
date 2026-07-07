@@ -27,16 +27,12 @@ return {
         signcolumn = "yes",
         wrap = false,
       },
-      g = {
-        -- Disable Copilot by default
-        copilot_enabled = false,
-      },
     },
     -- 4. KEYMAPS
     mappings = {
-      -- MODO NORMAL
+      -- NORMAL MODE
       n = {
-        -- Navegación de buffers (Tus mapeos actuales)
+        -- Buffer navigation (your current mappings)
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
         ["<Leader>C"] = { "<cmd>bdelete<CR>", desc = "Close Buffer" },
@@ -51,11 +47,11 @@ return {
         },
 
         -- ==========================================
-        -- NUEVO: CREATE FILE IN CURRENT DIRECTORY (<Leader>cf)
+        -- CREATE FILE IN CURRENT DIRECTORY (<Leader>cf)
         -- ==========================================
         ["<Leader>cf"] = {
           function()
-            -- Obtener ruta del buffer actual
+            -- Get the current buffer's path
             local current_dir = vim.fn.expand "%:p:h" .. "/"
 
             vim.ui.input({
@@ -65,20 +61,20 @@ return {
             }, function(input)
               if not input or input == "" then return end
 
-              -- Crear carpetas automáticamente si no existen
+              -- Automatically create folders if they don't exist
               local dir = vim.fn.fnamemodify(input, ":h")
               if vim.fn.isdirectory(dir) == 0 then vim.fn.mkdir(dir, "p") end
 
               vim.cmd("edit " .. input)
               vim.cmd "write"
-              print("Archivo creado: " .. input)
+              print("File created: " .. input)
             end)
           end,
           desc = "Create file in current directory",
         },
 
         -- ==========================================
-        -- DELETE WITHPUT COPY (Black hole register)
+        -- DELETE WITHOUT COPY (Black hole register)
         -- ==========================================
         ["d"] = { '"_d', desc = "Delete (no yank)" },
         ["c"] = { '"_c', desc = "Change (no yank)" },
@@ -87,7 +83,7 @@ return {
         ["C"] = { '"_C', desc = "Change line (no yank)" },
       },
 
-      -- MODO VISUAL
+      -- VISUAL MODE
       v = {
         ["d"] = { '"_d', desc = "Delete (no yank)" },
         ["c"] = { '"_c', desc = "Change (no yank)" },
@@ -101,6 +97,14 @@ return {
           event = "FileType",
           pattern = { "json", "httpResult" },
           callback = function() vim.bo.formatprg = "jq" end,
+        },
+      },
+      -- Persist the theme chosen with <Leader>ft for the next startup
+      save_colorscheme = {
+        {
+          event = "ColorScheme",
+          desc = "Save the selected colorscheme",
+          callback = function(args) require("user.theme").save(args.match) end,
         },
       },
     },
