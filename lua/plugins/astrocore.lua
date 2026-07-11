@@ -90,7 +90,32 @@ return {
         ["x"] = { '"_x', desc = "Delete char (no yank)" },
       },
     },
-    -- 5. AUTOCOMMANDS (FOR JQ)
+    -- 5. FILETYPES
+    -- Neovim only detects systemd units inside a `/systemd/` path. Map the
+    -- extensions globally so a standalone `.service` (etc.) gets `systemd`
+    -- filetype and the systemd-lsp server attaches.
+    filetypes = {
+      extension = {
+        -- Apple property lists are XML: gives syntax highlighting + xmllint
+        -- formatting (see lua/plugins/none-ls.lua). Neovim doesn't map it by default.
+        plist = "xml",
+        automount = "systemd",
+        dnssd = "systemd",
+        link = "systemd",
+        mount = "systemd",
+        netdev = "systemd",
+        network = "systemd",
+        nspawn = "systemd",
+        path = "systemd",
+        service = "systemd",
+        slice = "systemd",
+        socket = "systemd",
+        swap = "systemd",
+        target = "systemd",
+        timer = "systemd",
+      },
+    },
+    -- 6. AUTOCOMMANDS (FOR JQ)
     autocmds = {
       json_formatting = {
         {
